@@ -1,0 +1,20 @@
+spring:
+  profiles: 
+     active:
+        -dev    #开发环境
+---
+
+
+server:
+  port: 8761
+spring:
+  profiles: dev
+eureka:
+  instance:
+    hostname: eurekaserver1.com  #表示eureka服务端的实例名称
+  client:
+    registerWithEureka: false    #false表示不想注册中心注册自己
+    fetchRegistry: false         #false表示自己就是注册中心，我的职责就是维护服务实例，并不需要去检索服务
+    serviceUrl:
+      # defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://eurekaserver2.com:8762/eureka/,http://eurekaserver3.com:8763/eureka/

@@ -1,0 +1,53 @@
+  spring:
+  profiles: 
+     active:
+        -dev    #开发环境
+---
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eurekaserver1.com:8761/eureka/,http://eurekaserver2.com:8762/eureka/,http://eurekaserver3.com:8763/eureka/
+  instance:
+    instance-id: eureka-provider1
+    prefer-ip-address: true
+server:
+  port: 8751
+mybatis:
+  type-aliases-package: com.jxk.microservicecloud.entity
+  mapper-locations: classpath:mapper/*.xml
+  config-location: classpath:mybaties-config.xml
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/test
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+    dbcp2:
+      min-idle: 5
+      initial-size: 5
+      max-total: 5
+  profiles: dev
+  application:
+    name: eureka-provider-dept
+---
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/test1
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+    dbcp2:
+      min-idle: 5
+      initial-size: 5
+      max-total: 5
+  profiles: test
+  application:
+    name: eureka-provider-dept
+info:
+  app.name: jxk-microservicecloud
+  company.name: jxk's company
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+
